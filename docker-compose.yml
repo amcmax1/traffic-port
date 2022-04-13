@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  dev:
+    image: node:17
+    volumes:
+      - nodemodules:/usr/src/service/node_modules
+      - .:/usr/src/service
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=postgres
+    working_dir: /usr/src/service
+    networks:
+      - dev
+    depends_on:
+      - db
+    links:
+      - db
+    command: npm run dev
+
+  httpServer:
+    platform: linux/x86_64
+    image: openjdk:16-alpine3.13
+    container_name: httpServer1
+    volumes:
+      #      - ./digitalElemntHttpServer
+      - ./digitalElemntHttpServer:/usr/src/service/digitalElemntHttpServer
+    working_dir: /usr/src/service
+    ports:
+      - '8081:8081'
+    networks:
+      - dev
+    command: java -cp ./digitalElemntHttpServer/deHttpServer/deApiServer.jar DeApiServer -d ./digitalElemntHttpServer/db/na/
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - dev
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - dev
+    restart: unless-stopped
+
+volumes:
+  nodemodules:
+    external: true
+  postgres:
+  pgadmin:
+networks:
+  dev:
+    driver: bridge
