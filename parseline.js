@@ -6,4 +6,11 @@ function parseline(line) {
     }
 }
 
-module.exports = parseline;
+function parselinetocsv(line) {
+    const data = line.replace('|', ' , ');
+    // add quotes or convert to TSV
+    return data
+}
+
+module.exports = parseline
+
