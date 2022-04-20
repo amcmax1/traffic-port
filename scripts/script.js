@@ -1,6 +1,6 @@
 console.log("OK")
 
-connectDB = require("./dbClient")
+connectDB = require("../helpers/dbClient")
 connectDB()
 
 const fs = require('fs');
@@ -8,7 +8,7 @@ const readline = require('readline');
 const parseline = require('./parseline');
 
 let parsedTraffic = []
-getIpData = require("./getIpData")
+getIpData = require("../helpers/getIpData")
 
 function readTraffic(filename) {
     let lines = []

@@ -1,5 +1,5 @@
 const fs = require('fs');
-const listFiles = require('./../listFiles.js');
+const listFiles = require('../helpers/listFiles.js');
 
 let textFilesArray = Array.from(listFiles('rawData','000.txt'))
 let textFilesArrayFlat = textFilesArray.flat(4)

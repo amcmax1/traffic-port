@@ -1,6 +1,6 @@
 const fs = require('fs');
-const listFiles = require('./../listFiles.js');
-const decompressFileToTxt = require("../decompressFiles");
+const listFiles = require('../helpers/listFiles.js');
+const decompressFileToTxt = require("./decompressFiles");
 
 let filesArray = Array.from(listFiles('rawData','.gz'))
 let filesArrayFlat = filesArray.flat(4)

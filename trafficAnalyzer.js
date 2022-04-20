@@ -1,7 +1,7 @@
-const { logger } = require('./logger.js');
+const { logger } = require('./helpers/logger.js');
 const path = require("path")
-const listFiles = require('./listFiles.js');
-const decompressFileToTxt = require('./decompressFiles.js');
+const listFiles = require('./helpers/listFiles.js');
+const decompressFileToTxt = require('./scripts/decompressFiles.js');
 const fs = require('fs');
 const scriptArg = process.argv[2];
 const exec = require('child_process');
