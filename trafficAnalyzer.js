@@ -135,7 +135,7 @@ extractData(rawData.test.data[0]).then(v => {
      // TODO: replace with subscription to new_ip_added
     // TODO: insert ips to array, make request to http server, then insert to DB
     // TODO: update DB with response from http server
-
+    // TODO: files
 });
 
 // let filesArrayFlat = Array.from(listFiles('rawData','.gz')).flat(4)
