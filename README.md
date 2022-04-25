@@ -1,15 +1,20 @@
 ## Traffic Analysis
 
 ### Basic Setup
+```
 make setup
 make install
 make dev
+```
+
 
 ### Useful docker commands
+```
 docker ps -a
 docker exec -it e6eb2e12145f bash
 docker system prune
 docker-compose down --volumes
+```
 
 ### Git Semantics Key
 - build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
